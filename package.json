@@ -2,8 +2,9 @@
   "name": "cashcog-be",
   "version": "1.0.0",
   "description": "cashcog API",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
+    "start": "nodemon index.js --exec babel-node",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,5 +23,11 @@
   "homepage": "https://github.com/Kasulejoseph/cashcog-be#readme",
   "dependencies": {
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.7.4",
+    "@babel/core": "^7.7.4",
+    "@babel/node": "^7.7.4",
+    "@babel/preset-env": "^7.7.4"
   }
 }
