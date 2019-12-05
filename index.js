@@ -1,5 +1,5 @@
 import express from 'express'
-
+import './src/db/connect'
 const app = express()
 const router = express.Router()
 
