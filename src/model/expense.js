@@ -15,6 +15,9 @@ const expenseSchema = mongoose.Schema({
     },
     currency: {
         type: String
+    },
+    employee: {
+        type: String
     }
 })
 
