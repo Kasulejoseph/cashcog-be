@@ -3,7 +3,7 @@ import './src/db/connect'
 const app = express()
 const router = express.Router()
 import expenseStream from './src/helper/expenseStream'
-expenseStream()
+// expenseStream()
 router.get('/', (req, res) => {
     res.send({
         message: 'me you'
