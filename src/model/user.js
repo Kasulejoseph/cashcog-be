@@ -10,7 +10,12 @@ const userSchema = mongoose.Schema({
     }
 })
 
-
+userSchema.methods.toJSON = function () {
+    const userObj = this.toObject()
+    delete userObj.__v
+    delete userObj._id
+    return userObj
+}
 
 const User = mongoose.model('Users', userSchema)
 
