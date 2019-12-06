@@ -3,7 +3,9 @@ import './src/db/connect'
 const app = express()
 const router = express.Router()
 import Expense from './src/controller'
-// expenseStream()
+import expenseStream from './src/helper/expenseStream'
+
+expenseStream()
 router.get('/', Expense.addUser)
 
 app.use(router)
