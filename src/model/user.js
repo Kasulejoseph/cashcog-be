@@ -2,7 +2,8 @@ import mongoose from 'mongoose'
 
 const userSchema = mongoose.Schema({
     uuid: {
-        type: String
+        type: String,
+        unique: true
     },
     first_name: {
         type: String

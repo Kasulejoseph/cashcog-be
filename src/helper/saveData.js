@@ -11,6 +11,6 @@ export default async(employee, expenseObj) => {
         // console.log(expenseData);
 
     } catch (error) {
-        throw new Error('something went wrong')
+        Error('something went wrong')
     }
 }
