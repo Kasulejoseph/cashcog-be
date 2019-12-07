@@ -2,7 +2,8 @@ import mongoose from 'mongoose'
 
 const userSchema = mongoose.Schema({
     uuid: {
-        type: String
+        type: String,
+        unique: true
     },
     first_name: {
         type: String
@@ -12,11 +13,11 @@ const userSchema = mongoose.Schema({
 
     }
 })
-// userSchema.virtual('expenses', {
-//     ref: 'Expenses',
-//     localField: 'uuid',
-//     foreignField: 'uuid'
-// })
+userSchema.virtual('expenses', {
+    ref: 'Expenses',
+    localField: 'uuid',
+    foreignField: 'uuid'
+})
 
 userSchema.methods.toJSON = function () {
     const userObj = this.toObject()

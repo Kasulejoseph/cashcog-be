@@ -7,6 +7,7 @@ process.env.NODE_ENV == 'local' ? connectionString = process.env.DBLOCAL : conne
 
 mongoose.connect(connectionString, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useCreateIndex: true
 
 }).catch((error) => console.log(error))
