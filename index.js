@@ -2,11 +2,11 @@ import express from 'express'
 import './src/db/connect'
 const app = express()
 const router = express.Router()
-import Expense from './src/controller'
+import ExpenseController from './src/controller'
 import expenseStream from './src/helper/expenseStream'
 
-expenseStream()
-router.get('/', Expense.addUser)
+// expenseStream()
+router.get('/', ExpenseController.getExpenses)
 
 app.use(router)
-app.listen(4000)
+app.listen(3000)
