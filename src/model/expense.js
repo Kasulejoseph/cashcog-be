@@ -1,5 +1,4 @@
 import mongoose from 'mongoose'
-
 const expenseSchema = mongoose.Schema({
     uuid: {
         type: String
@@ -17,9 +16,17 @@ const expenseSchema = mongoose.Schema({
         type: String
     },
     employee: {
-        type: String
+        type: String,
+        ref: 'Users'
     }
 })
+
+expenseSchema.methods.toJSON = function () {
+    const userObj = this.toObject()
+    delete userObj.__v
+    delete userObj._id
+    return userObj
+}
 
 const Expense  = mongoose.model('Expenses', expenseSchema)
 
