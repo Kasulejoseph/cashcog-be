@@ -8,7 +8,6 @@ export default async (queryParams, queryKeys, currentPage) => {
     const newArray = queryKeys.filter(value => value !== 'page')
     delete queryParams.page
 
-
     const isValidParam = newArray.every((key) => requiredParams.includes(key))
     if (!isValidParam) {
         return {
@@ -16,6 +15,7 @@ export default async (queryParams, queryKeys, currentPage) => {
             error: "Invalid query param(s)"
         }
     }
+
     const data = await Expense.find(queryParams)
         .skip((expPerPage * currentPage) - expPerPage)
         .limit(expPerPage)
