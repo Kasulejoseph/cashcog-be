@@ -1,7 +1,6 @@
 export default async () => {
-    return {
-        status: 500,
-        error: "sorry, something went wrong!"
-    }
-
-}
+  return {
+    status: 500,
+    error: "sorry, something went wrong!"
+  };
+};
