@@ -1,5 +1,6 @@
 import Expense from '../model/expense'
 import User from '../model/user';
+import updateHelper from '../helper/updateHelper';
 class ExpenseController {
     static async getExpenses(req, res) {
         const data = await Expense.find({})
@@ -12,9 +13,9 @@ class ExpenseController {
     }
     static async userExpenses(req, res) {
         const { id } = req.params
-        const data = await Expense.find({employee: id})
+        const data = await Expense.find({ employee: id })
         const count = data.length
-        const employee = await User.find({uuid: id})
+        const employee = await User.find({ uuid: id })
         res.send({
             status: 200,
             count,
@@ -28,31 +29,9 @@ class ExpenseController {
             const { status } = req.body
             const reqValue = Object.values(req.body)[0].toLowerCase()
             const requiredValues = ['declined', 'approved']
-                        
-            if(!requiredValues.includes(reqValue)) {
-                return res.send({
-                    status: 400,
-                    error: "Status should either be declined or approved"
-                })
-            }
-            if(!status) {
-                return res.send({
-                    status: 400,
-                    error: "Key should be status"
-                })
-            }
-            const data = await Expense.findOneAndUpdate({uuid: id}, {status}, {new: true})    
-            if (!data) {
-                return res.send({
-                    status: 404,
-                    error: `Expense with id ${id} is not found`
-                })
-            }    
-            return res.send({
-                status: 201,
-                data
-            })
-            
+            const response = await updateHelper(id, status, reqValue, requiredValues, res)                                  
+            return res.send(response)
+
         } catch (error) {
             res.send({
                 status: 500,
