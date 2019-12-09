@@ -11,10 +11,10 @@ class ExpenseController {
       const queryKeys = Object.keys(req.query);
       const currentPage = Number(req.query.page) || 1;
       const response = await queryHelper(queryParams, queryKeys, currentPage);
-      res.send(response);
+      res.status(response.statusCode).send(response);
     } catch (error) {
       const response = await handle500();
-      res.send(response);
+      res.status(500).send(response);
     }
   }
   static async userExpenses(req, res) {
@@ -23,7 +23,7 @@ class ExpenseController {
       const expenses = await Expense.find({ employee: id });
       const count = expenses.length;
       const employee = await User.find({ uuid: id });
-      res.send({
+      res.status(response.statusCode).send({
         status: 200,
         count,
         employee,
@@ -31,7 +31,7 @@ class ExpenseController {
       });
     } catch (error) {
       const response = await handle500();
-      res.send(response);
+      res.status(500).send(response);
     }
   }
   static async updateExpenses(req, res) {
@@ -41,10 +41,10 @@ class ExpenseController {
       const reqValue = Object.values(req.body)[0].toLowerCase();
       const requiredValues = ["declined", "approved"];
       const response = await updateHelper(id, status, reqValue, requiredValues);
-      return res.send(response);
+      return res.status(response.statusCode).send(response);
     } catch (error) {
       const response = await handle500();
-      res.send(response);
+      res.status(response.status).send(response);
     }
   }
 }

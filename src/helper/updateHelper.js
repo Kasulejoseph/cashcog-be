@@ -2,7 +2,7 @@ import Expense from "../model/expense";
 
 export default async (id, status, reqValue, requiredValues) => {
   let message = undefined;
-  let statusCode = 201;
+  let statusCode = 200;
   if (!requiredValues.includes(reqValue)) {
     statusCode = 400;
     message = "Status should either be declined or approved";
