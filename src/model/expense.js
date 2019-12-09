@@ -18,6 +18,11 @@ const expenseSchema = mongoose.Schema({
     employee: {
         type: String,
         ref: 'Users'
+    },
+    status: {
+        type: String,
+        default: "pending",
+        lowercase: true
     }
 })
 
