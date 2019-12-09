@@ -21,7 +21,8 @@ const expenseSchema = mongoose.Schema({
     },
     status: {
         type: String,
-        default: "pending"
+        default: "pending",
+        lowercase: true
     }
 })
 

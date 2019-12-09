@@ -26,21 +26,27 @@ class ExpenseController {
         try {
             const { id } = req.params
             const { status } = req.body
-
+            const reqValue = Object.values(req.body)[0].toLowerCase()
+            const requiredValues = ['declined', 'approved']
+                        
+            if(!requiredValues.includes(reqValue)) {
+                return res.send({
+                    status: 400,
+                    error: "Status should either be declined or approved"
+                })
+            }
             if(!status) {
                 return res.send({
                     status: 400,
                     error: "Key should be status"
                 })
             }
-                        
             const data = await Expense.findOneAndUpdate({uuid: id}, {status}, {new: true})    
             if (!data) {
                 return res.send({
                     status: 404,
                     error: `Expense with id ${id} is not found`
                 })
-
             }    
             return res.send({
                 status: 201,
