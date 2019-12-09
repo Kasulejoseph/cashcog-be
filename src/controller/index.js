@@ -6,19 +6,29 @@ class ExpenseController {
         try {
             const queryParams = req.query
             const queryKeys = Object.keys(req.query)
+            const currentPage = Number(req.query.page) || 1
+            const expPerPage = 5
             const requiredParams = ["status", "uuid", "description", "created_at", "amount", "currency", "employee"]
-            const isValidParam = queryKeys.every((key) => requiredParams.includes(key))
+
+            // eliminate page
+            const newArray = queryKeys.filter(value => value !== 'page')
+            delete queryParams.page            
+
+            
+            const isValidParam = newArray.every((key) => requiredParams.includes(key))
             if (!isValidParam) {
                 return res.send({
                     status: 422,
                     error: "Invalid query param(s)"
                 })
-            }
-
-            const data = await Expense.find(queryParams).limit(2)
-            const count = data.length
+            }            
+            const data = await Expense.find(queryParams)
+            .skip((expPerPage*currentPage) - expPerPage)
+            .limit(expPerPage)
+            const count = await Expense.countDocuments()
             res.send({
                 status: 200,
+                pages: Math.ceil(count / expPerPage),
                 count,
                 data
             })
