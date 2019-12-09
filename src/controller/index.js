@@ -1,38 +1,15 @@
 import Expense from '../model/expense'
 import User from '../model/user';
 import updateHelper from '../helper/updateHelper';
+import queryHelper from '../helper/queryHelper';
 class ExpenseController {
     static async getExpenses(req, res) {
         try {
             const queryParams = req.query
             const queryKeys = Object.keys(req.query)
             const currentPage = Number(req.query.page) || 1
-            const expPerPage = 5
-            const requiredParams = ["status", "uuid", "description", "created_at", "amount", "currency", "employee"]
-
-            // eliminate page
-            const newArray = queryKeys.filter(value => value !== 'page')
-            delete queryParams.page            
-
-            
-            const isValidParam = newArray.every((key) => requiredParams.includes(key))
-            if (!isValidParam) {
-                return res.send({
-                    status: 422,
-                    error: "Invalid query param(s)"
-                })
-            }            
-            const data = await Expense.find(queryParams)
-            .skip((expPerPage*currentPage) - expPerPage)
-            .limit(expPerPage)
-            const count = await Expense.countDocuments()
-            res.send({
-                status: 200,
-                pages: Math.ceil(count / expPerPage),
-                count,
-                data
-            })
-
+            const response = await queryHelper(queryParams, queryKeys, currentPage)            
+            res.send(response)
         } catch (error) {
             res.send({
                 status: 500,
@@ -59,7 +36,7 @@ class ExpenseController {
             const { status } = req.body
             const reqValue = Object.values(req.body)[0].toLowerCase()
             const requiredValues = ['declined', 'approved']
-            const response = await updateHelper(id, status, reqValue, requiredValues, res)
+            const response = await updateHelper(id, status, reqValue, requiredValues)
             return res.send(response)
 
         } catch (error) {
