@@ -22,6 +22,38 @@ class ExpenseController {
             data
         })
     }
+    static async updateExpenses(req, res) {
+        try {
+            const { id } = req.params
+            const { status } = req.body
+
+            if(!status) {
+                return res.send({
+                    status: 400,
+                    error: "Key should be status"
+                })
+            }
+                        
+            const data = await Expense.findOneAndUpdate({uuid: id}, {status}, {new: true})    
+            if (!data) {
+                return res.send({
+                    status: 404,
+                    error: `Expense with id ${id} is not found`
+                })
+
+            }    
+            return res.send({
+                status: 201,
+                data
+            })
+            
+        } catch (error) {
+            res.send({
+                status: 500,
+                error: "something went wrong"
+            })
+        }
+    }
 
 }
 
