@@ -1,7 +1,6 @@
-import User from '../model/user';
 import Expense from '../model/expense';
 
-export default async(id, status, reqValue, requiredValues, res) => {
+export default async(id, status, reqValue, requiredValues) => {
     let message = undefined
     let statusCode = 201
     if(!requiredValues.includes(reqValue)) {

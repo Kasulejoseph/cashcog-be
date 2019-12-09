@@ -1,27 +1,40 @@
 import Expense from '../model/expense'
 import User from '../model/user';
 import updateHelper from '../helper/updateHelper';
+import queryHelper from '../helper/queryHelper';
+import handle500 from '../helper/handle500';
 class ExpenseController {
     static async getExpenses(req, res) {
-        const data = await Expense.find({})
-        const count = data.length
-        res.send({
-            status: 200,
-            count,
-            data
-        })
+        try {
+            const queryParams = req.query
+            const queryKeys = Object.keys(req.query)
+            const currentPage = Number(req.query.page) || 1
+            const response = await queryHelper(queryParams, queryKeys, currentPage)
+            res.send(response)
+        } catch (error) {
+            const response = await handle500()
+            res.send(response)
+
+        }
     }
     static async userExpenses(req, res) {
-        const { id } = req.params
-        const data = await Expense.find({ employee: id })
-        const count = data.length
-        const employee = await User.find({ uuid: id })
-        res.send({
-            status: 200,
-            count,
-            employee,
-            data
-        })
+        try {
+            const { id } = req.params
+            const expenses = await Expense.find({ employee: id })
+            const count = expenses.length
+            const employee = await User.find({ uuid: id })
+            res.send({
+                status: 200,
+                count,
+                employee,
+                expenses
+            })
+
+        } catch (error) {
+            const response = await handle500()
+            res.send(response) 
+
+        }
     }
     static async updateExpenses(req, res) {
         try {
@@ -29,14 +42,12 @@ class ExpenseController {
             const { status } = req.body
             const reqValue = Object.values(req.body)[0].toLowerCase()
             const requiredValues = ['declined', 'approved']
-            const response = await updateHelper(id, status, reqValue, requiredValues, res)                                  
+            const response = await updateHelper(id, status, reqValue, requiredValues)
             return res.send(response)
 
         } catch (error) {
-            res.send({
-                status: 500,
-                error: "something went wrong"
-            })
+            const response = await handle500()
+            res.send(response) 
         }
     }
 

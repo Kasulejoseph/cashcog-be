@@ -9,7 +9,7 @@ const { getExpenses, userExpenses, updateExpenses } = ExpenseController
 // expenseStream()
 app.use(express.json())
 router.get('/', getExpenses)
-router.get('/:id', userExpenses)
+router.get('/users/:id', userExpenses)
 router.patch('/:id', updateExpenses)
 
 app.use(router)
