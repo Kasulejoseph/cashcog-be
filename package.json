@@ -6,7 +6,8 @@
   "scripts": {
     "start": "NODE_ENV=local nodemon index.js --exec babel-node",
     "start:prod": "node --require @babel/register index.js",
-    "test": "NODE_ENV=test nyc mocha --require @babel/register test/*.js --timeout 10000 --exit"
+    "test": "NODE_ENV=test nyc --reporter=html --reporter=text mocha --require @babel/register test/*.js --timeout 10000 --exit",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
@@ -37,11 +38,12 @@
     "event-stream": "^4.0.1",
     "express": "^4.17.1",
     "mongoose": "^5.7.13",
-    "nyc": "^14.1.1",
     "request": "^2.88.0"
   },
   "devDependencies": {
+    "coveralls": "^3.0.9",
     "mocha": "^6.2.2",
-    "nodemon": "^2.0.1"
+    "nodemon": "^2.0.1",
+    "nyc": "^14.1.1"
   }
 }
