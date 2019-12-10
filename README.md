@@ -2,7 +2,7 @@
 > An API to manage expenses for startup company builders like [XCNT](https://xcnt.io)
 
 ## Badges
-[![Test Coverage](https://api.codeclimate.com/v1/badges/1b1c51864a0e951003d0/test_coverage)](https://codeclimate.com/github/Kasulejoseph/cashcog-be/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/1b1c51864a0e951003d0/maintainability)](https://codeclimate.com/github/Kasulejoseph/cashcog-be/maintainability)
 
 https://cashcog.herokuapp.com/
 ## Prerequisites
