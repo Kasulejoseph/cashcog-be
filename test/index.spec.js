@@ -32,16 +32,18 @@ describe("/GET expenses", () => {
         done();
       });
   });
-  it("should query expenses", done => {
-    chai
-      .request(server)
+  it("should query expenses", async () => {
+    try {
+      const res = await chai.request(server)
       .get("/?status=pending")
-      .end((err, res) => {
-        res.should.have.status(200);
-        res.body.data.should.be.a("array");
-        res.body.data.should.be.lengthOf(1);
-        done();
-      });
+      res.should.have.status(200);
+      res.body.data.should.be.a("array");
+      res.body.data.should.be.lengthOf(1);
+    } catch (error) {
+      console.log(error)
+      
+    }
+
   });
   it("should return error when wrong keys are used", done => {
     chai
