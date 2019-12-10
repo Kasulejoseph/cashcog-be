@@ -50,7 +50,7 @@ class ExpenseController {
       return res.status(response.statusCode).send(response);
     } catch (error) {
       const response = await handle500();      
-      res.status(500).send(error);
+      res.status(500).send(response);
     }
   }
 }

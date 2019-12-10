@@ -5,7 +5,7 @@ const { getExpenses, userExpenses, updateExpenses } = ExpenseController;
 
 router.get("/", getExpenses);
 router.get("/users/:id", userExpenses);
-router.put("/:id", updateExpenses);
+router.patch("/:id", updateExpenses);
 router.all('*', (req, res) => {
     res.status(405).send({
         status: 405,
