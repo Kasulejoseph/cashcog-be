@@ -10,7 +10,7 @@ process.env.NODE_ENV == "local"
   if(process.env.NODE_ENV == "test") {
     connectionString = process.env.DBTEST
   }
-console.log('process.env.NODE_ENV', process.env.DBPROD, process.env.DBTEST);
+console.log('process.env.NODE_ENV', process.env.DBPROD, DBTEST);
 console.log('connectionString', connectionString);
 
 
