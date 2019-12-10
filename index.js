@@ -1,11 +1,7 @@
-import express from 'express'
-import './src/db/connect'
-const app = express()
+import app from './app'
+const port = process.env.PORT
 
-import expenseStream from './src/helper/expenseStream'
-import routers from './src/routers'
-// expenseStream()
-app.use(express.json())
-app.use(routers)
+app.listen(port, () => {
+console.log(port)
+})
 
-app.listen(3000)
