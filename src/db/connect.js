@@ -10,6 +10,12 @@ process.env.NODE_ENV == "local"
   if(process.env.NODE_ENV == "test") {
     connectionString = process.env.DBTEST
   }
+console.log('process.env.NODE_ENV', process.env);
+console.log('connectionString', connectionString);
+console.log('');
+
+
+
 mongoose
   .connect(connectionString, {
     useNewUrlParser: true,
