@@ -1,6 +1,8 @@
 env:
   global:
     - CC_TEST_REPORTER_ID=abca610eaee3da45441c1af2ea29d294caad6b7998267bb28554ef2a6b8267f4
+    - DBTEST=mongodb://cashcog:casjos06@cluster0-shard-00-00-ac86u.mongodb.net:27017,cluster0-shard-00-01-ac86u.mongodb.net:27017,cluster0-shard-00-02-ac86u.mongodb.net:27017/cashcog-tests?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority
+
 language: node_js
 cache:
   directories:
