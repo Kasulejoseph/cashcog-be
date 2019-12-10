@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=local nodemon index.js --exec babel-node",
-    "test": "mocha --temeout 10000"
+    "test": "NODE_ENV=test mocha --require @babel/register test/*.js --timeout 1000 "
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/Kasulejoseph/cashcog-be#readme",
   "dependencies": {
+    "@babel/runtime": "^7.7.6",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "cors": "^2.8.5",
@@ -35,9 +36,10 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.7.4",
-    "@babel/core": "^7.7.4",
+    "@babel/core": "^7.7.5",
     "@babel/node": "^7.7.4",
+    "@babel/plugin-transform-runtime": "^7.7.6",
     "@babel/preset-env": "^7.7.4",
-    "regenerator-runtime": "^0.13.3"
+    "@babel/register": "^7.7.4"
   }
 }

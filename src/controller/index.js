@@ -23,6 +23,12 @@ class ExpenseController {
       const expenses = await Expense.find({ employee: id });
       const count = expenses.length;
       const employee = await User.find({ uuid: id });
+      if(employee.length == 0) {
+        return res.status(404).send({
+          status: 404,
+          error: `User with id ${id} is not found`
+        })
+      }
       res.status(200).send({
         status: 200,
         count,
@@ -43,8 +49,8 @@ class ExpenseController {
       const response = await updateHelper(id, status, reqValue, requiredValues);
       return res.status(response.statusCode).send(response);
     } catch (error) {
-      const response = await handle500();
-      res.status(response.status).send(response);
+      const response = await handle500();      
+      res.status(500).send(error);
     }
   }
 }

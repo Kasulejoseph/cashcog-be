@@ -7,6 +7,9 @@ process.env.NODE_ENV == "local"
   ? (connectionString = process.env.DBLOCAL)
   : (connectionString = process.env.DBPROD);
 
+  if(process.env.NODE_ENV == "test") {
+    connectionString = process.env.DBLOCAL
+  }
 mongoose
   .connect(connectionString, {
     useNewUrlParser: true,
