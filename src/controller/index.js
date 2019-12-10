@@ -10,11 +10,11 @@ class ExpenseController {
       const queryParams = req.query;
       const queryKeys = Object.keys(req.query);
       const currentPage = Number(req.query.page) || 1;
-      const response = await queryHelper(queryParams, queryKeys, currentPage);
-      res.status(response.statusCode).send(response);
+      const response = await queryHelper(queryParams, queryKeys, currentPage);      
+      res.status(response.status).send(response);
     } catch (error) {
       const response = await handle500();
-      res.status(500).send(response);
+      res.status(response.statusCode).send(error);
     }
   }
   static async userExpenses(req, res) {
@@ -23,7 +23,7 @@ class ExpenseController {
       const expenses = await Expense.find({ employee: id });
       const count = expenses.length;
       const employee = await User.find({ uuid: id });
-      res.status(response.statusCode).send({
+      res.status(200).send({
         status: 200,
         count,
         employee,
@@ -31,7 +31,7 @@ class ExpenseController {
       });
     } catch (error) {
       const response = await handle500();
-      res.status(500).send(response);
+      res.status(response.statusCode).send(error);
     }
   }
   static async updateExpenses(req, res) {
