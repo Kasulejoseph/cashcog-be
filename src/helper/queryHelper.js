@@ -1,7 +1,7 @@
 import Expense from "../model/expense";
 
 export default async (queryParams, queryKeys, currentPage) => {
-  const expPerPage = 5;
+  const expPerPage = 6;
   const requiredParams = [
     "status",
     "uuid",
