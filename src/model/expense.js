@@ -16,7 +16,7 @@ const expenseSchema = mongoose.Schema({
     type: String
   },
   employee: {
-    type: String,
+    type: Object,
     ref: "Users"
   },
   status: {
