@@ -20,7 +20,7 @@ class ExpenseController {
   static async userExpenses(req, res) {
     try {
       const { id } = req.params;
-      const expenses = await Expense.find({ employee: id });
+      const expenses = await Expense.find({ 'employee.uuid':  id });
       const count = expenses.length;
       const employee = await User.find({ uuid: id });
       if(employee.length == 0) {

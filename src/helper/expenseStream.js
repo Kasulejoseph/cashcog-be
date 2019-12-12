@@ -10,7 +10,6 @@ export default async () => {
       es.through(
         async function write(data) {
           this.emit("data", data);
-          const { employees } = data;
           const {
             uuid,
             description,
@@ -27,7 +26,7 @@ export default async () => {
             currency,
             employee
           };
-          saveData(employees, expenseObj);
+          saveData(employee, expenseObj);
         },
         function end() {
           this.emit("end");
