@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 const expenseSchema = mongoose.Schema({
   uuid: {
-    type: String
+    type: String,
+    unique: true
   },
   description: {
     type: String
@@ -16,8 +17,7 @@ const expenseSchema = mongoose.Schema({
     type: String
   },
   employee: {
-    type: String,
-    ref: "Users"
+    type: Object
   },
   status: {
     type: String,

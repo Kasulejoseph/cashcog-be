@@ -1,7 +1,6 @@
 import request from "request";
 import es from "event-stream";
 import saveData from "./saveData";
-
 export default async () => {
   request
     .get("https://cashcog.xcnt.io/stream")
@@ -11,15 +10,21 @@ export default async () => {
       es.through(
         async function write(data) {
           this.emit("data", data);
-          const { employee } = data;
-          const { uuid, description, created_at, amount, currency } = data;
+          const {
+            uuid,
+            description,
+            currency,
+            created_at,
+            amount,
+            employee
+          } = data;
           const expenseObj = {
             uuid,
             description,
             created_at,
             amount,
             currency,
-            employee: employee.uuid
+            employee
           };
           saveData(employee, expenseObj);
         },
