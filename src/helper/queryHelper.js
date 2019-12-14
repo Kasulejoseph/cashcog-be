@@ -1,7 +1,7 @@
 import Expense from "../model/expense";
 
 export default async (queryParams, queryKeys, currentPage) => {
-  const expPerPage = 6;
+  const expPerPage = 9;
   const requiredParams = [
     "status",
     "uuid",
@@ -27,7 +27,7 @@ export default async (queryParams, queryKeys, currentPage) => {
   const data = await Expense.find(queryParams)
     .skip(expPerPage * currentPage - expPerPage)
     .limit(expPerPage);
-  const count = await Expense.countDocuments();
+  const count = await Expense.countDocuments(queryParams);
   return {
     status: 200,
     pages: Math.ceil(count / expPerPage),
