@@ -24,7 +24,6 @@ export default async (queryParams, queryKeys, currentPage) => {
       error: "Invalid query param(s)"
     };
   }
-
   const data = await Expense.find(queryParams)
     .skip(expPerPage * currentPage - expPerPage)
     .limit(expPerPage);
