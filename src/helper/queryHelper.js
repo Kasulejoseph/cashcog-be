@@ -1,7 +1,7 @@
 import Expense from "../model/expense";
 
 export default async (queryParams, queryKeys, currentPage) => {
-  const expPerPage = queryParams.limit ? Number(queryParams.limit): 0;
+  const expPerPage = 9
   const requiredParams = [
     "status",
     "uuid",
@@ -12,11 +12,9 @@ export default async (queryParams, queryKeys, currentPage) => {
     "employee"
   ];
 
-  // eliminate page and limit
-  const newArray = queryKeys.filter(value => (value !== "page" && value !== "limit"));  
+  // eliminate page
+  const newArray = queryKeys.filter(value => value !== "page");  
   delete queryParams.page;
-  delete queryParams.limit;
-
   const isValidParam = newArray.every(key => requiredParams.includes(key));
   if (!isValidParam) {
     return {
@@ -28,7 +26,7 @@ export default async (queryParams, queryKeys, currentPage) => {
     .skip(expPerPage * currentPage - expPerPage)
     .limit(expPerPage);
   const count = await Expense.countDocuments(queryParams);
-  const pages = expPerPage === 0 ? 1: Math.ceil(count / expPerPage)
+  const pages = Math.ceil(count / expPerPage)
   return {
     status: 200,
     pages,
