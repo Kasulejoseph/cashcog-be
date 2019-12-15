@@ -3,6 +3,7 @@ import User from "../model/user";
 import updateHelper from "../helper/updateHelper";
 import queryHelper from "../helper/queryHelper";
 import handle500 from "../helper/handle500";
+import analysisHelper from "../helper/analysisHelper";
 
 class ExpenseController {
   static async getExpenses(req, res) {
@@ -55,17 +56,8 @@ class ExpenseController {
   }
   static async analystsData(req, res){
     try {
-      let data = []
-      const amount = []
-      const expenseData = await Expense.find({})
-      expenseData.forEach((item) => {
-        const dataObj = {amount: item.amount, date: item.created_at, employee: item.employee}        
-        data.push(dataObj)
-        amount.push(item.amount)
-      })
-      const sum = amount.reduce((a, b) => a + b, 0)
-
-      res.send({sum, data})
+      const response =  await analysisHelper()
+      res.send(response)
     } catch (error) {
       const response = await handle500();
       res.status(response.statusCode).send(error);
