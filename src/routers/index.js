@@ -6,7 +6,7 @@ const { getExpenses, userExpenses, updateExpenses, analystsData } = ExpenseContr
 router.get("/", getExpenses);
 router.get("/users/:id", userExpenses);
 router.patch("/:id", updateExpenses);
-router.get("/graph", analystsData);
+router.get("/analysis", analystsData);
 router.all('*', (req, res) => {
     res.status(405).send({
         status: 405,

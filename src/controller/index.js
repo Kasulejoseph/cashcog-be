@@ -63,7 +63,6 @@ class ExpenseController {
         data.push(dataObj)
         amount.push(item.amount)
       })
-      // console.log(yy);
       const sum = amount.reduce((a, b) => a + b, 0)
 
       res.send({sum, data})
