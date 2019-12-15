@@ -95,6 +95,17 @@ describe("/users:id GET user expenses", () => {
         done();
       });
   });
+  it("should fetch analysis", done => {
+    chai
+      .request(server)
+      .get("/analysis")
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.data.should.be.a("array");
+        res.text.includes('"status":200');
+        done();
+      });
+  });
 });
 
 // describe('/:id PUT update expenses', () => {
