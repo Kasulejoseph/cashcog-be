@@ -53,6 +53,26 @@ class ExpenseController {
       res.status(500).send(response);
     }
   }
+  static async analystsData(req, res){
+    try {
+      let data = []
+      const amount = []
+      const expenseData = await Expense.find({})
+      expenseData.forEach((item) => {
+        const dataObj = {amount: item.amount, date: item.created_at, employee: item.employee}        
+        data.push(dataObj)
+        amount.push(item.amount)
+      })
+      // console.log(yy);
+      const sum = amount.reduce((a, b) => a + b, 0)
+
+      res.send({sum, data})
+    } catch (error) {
+      const response = await handle500();
+      res.status(response.statusCode).send(error);
+    }
+
+  }
 }
 
 export default ExpenseController;
