@@ -3,6 +3,7 @@ import User from "../model/user";
 import updateHelper from "../helper/updateHelper";
 import queryHelper from "../helper/queryHelper";
 import handle500 from "../helper/handle500";
+import analysisHelper from "../helper/analysisHelper";
 
 class ExpenseController {
   static async getExpenses(req, res) {
@@ -52,6 +53,16 @@ class ExpenseController {
       const response = await handle500();      
       res.status(500).send(response);
     }
+  }
+  static async analystsData(req, res){
+    try {
+      const response =  await analysisHelper()
+      res.send(response)
+    } catch (error) {
+      const response = await handle500();
+      res.status(response.statusCode).send(error);
+    }
+
   }
 }
 
