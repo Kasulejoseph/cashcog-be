@@ -105,6 +105,17 @@ describe("/users:id GET user expenses", () => {
         res.text.includes('"status":200');
         done();
       });
+  });  
+  it("should sort expenses", done => {
+    chai
+      .request(server)
+      .get("/?sort=amount:asc")
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.data.should.be.a("array");
+        res.text.includes('"status":200');
+        done();
+      });
   });
 });
 
