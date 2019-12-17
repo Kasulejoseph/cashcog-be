@@ -33,6 +33,9 @@ Clone the repo
 |     /                  | Fetch all expenses   |   GET   |
 |     /users/:employee_uuid         | Fetch User Expenses   |   GET |  |
 |     /:expense_uuid       | Update expenses[declined, approved].  | PATCH | status
+|     /?status=approved$amount...      | Query/Filter expenses.  | GET | 
+|     /?sort=amount:asc      | sort expenses [amount, created_at]  | GET | 
+|     /analysis       | Fetches data used for Quantitative analysis.  | GET |
 
 ## Documentation
 - [Postman](https://documenter.getpostman.com/view/5485878/SWE6ad8w?version=latest)
