@@ -1,7 +1,7 @@
 import app from './app'
-const port = process.env.PORT
+const { PORT } = process.env
 
-app.listen(port, () => {
-console.log(port)
+app.listen(PORT, () => {
+console.log(PORT)
 })
 

@@ -22,8 +22,8 @@ export default async (queryParams, queryKeys, currentPage) => {
 
   // eliminate page
   const newArray = queryKeys.filter(
-    value => value !== "page" && value !== "sort"
-  );
+    value => !["page", "sort"].includes(value)
+  );  
   delete queryParams.page;
   delete queryParams.sort;
   const isValidParam = newArray.every(key => requiredParams.includes(key));

@@ -17,11 +17,11 @@ export default async (id, status, reqValue, requiredValues) => {
     { uuid: id },
     { status },
     { new: true }
-  );
+  );  
   if (!data) {
     statusCode = 404;
     message = `Expense with id ${id} is not found`;
-    return statusCode, message;
+    return {statusCode, message};
   }
   return { statusCode, message, data };
 };

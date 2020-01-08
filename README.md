@@ -24,7 +24,8 @@ Clone the repo
 ```
 - $ npm run start
 ```
- 
+
+- mongod --config /usr/local/etc/mongod.conf 
 
 ## End Points
 

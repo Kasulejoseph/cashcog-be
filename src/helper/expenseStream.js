@@ -1,9 +1,12 @@
 import request from "request";
 import es from "event-stream";
+import dotenv from 'dotenv'
 import saveData from "./saveData";
+dotenv.config()
+const {STREAM_URL} = process.env
 export default async () => {
   request
-    .get("https://cashcog.xcnt.io/stream")
+    .get(STREAM_URL)
     .pipe(es.split())
     .pipe(es.parse())
     .pipe(

@@ -2,7 +2,7 @@ import Expense from "../model/expense";
 
 export default async () => {
   let data = [];
-  const amount = [];
+  let sum =  0;
   const expenseData = await Expense.find({});
   expenseData.forEach(item => {
     const dataObj = {
@@ -11,8 +11,7 @@ export default async () => {
       employee: item.employee
     };
     data.push(dataObj);
-    amount.push(item.amount);
+    sum += item.amount;
   });
-  const sum = amount.reduce((a, b) => a + b, 0);
   return { sum, data };
 };
